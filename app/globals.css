@@ -1,0 +1,182 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-sans: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'Geist Mono', 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* Core Editorial Publication Palette */
+  --bg-paper: #F4F1EA;
+  --bg-ink: #111111;
+  --bg-soft-white: #FAF9F6;
+  --text-ink: #111111;
+  --text-paper: #F4F1EA;
+  --text-muted: #686868;
+  --zevats-purple: #7B2CF6;
+  --zevats-deep: #5B0FA8;
+  --hairline-paper: rgba(17, 17, 17, 0.08);
+  --hairline-ink: rgba(244, 241, 234, 0.12);
+
+  /* Semantic mappings for default elements */
+  --bg-primary: #F4F1EA;
+  --bg-secondary: #FAF9F6;
+  --bg-tertiary: #EBE7DC;
+  --surface: #FAF9F6;
+  --surface-hover: #F2EEE5;
+  --surface-elevated: #FFFFFF;
+  --border-subtle: rgba(17, 17, 17, 0.08);
+  --border-strong: rgba(17, 17, 17, 0.2);
+  --text-primary: #111111;
+  --text-secondary: #686868;
+  --text-muted: #8E8A82;
+  --nav-scrolled: rgba(244, 241, 234, 0.94);
+  --modal-bg: #FAF9F6;
+
+  --brand-purple: #7B2CF6;
+  --brand-deep: #5B0FA8;
+  --brand-vibrant: #9333EA;
+  --brand-royal: #5B0FA8;
+  --brand-lavender: #D8B4FE;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #F4F1EA;
+  color: #111111;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  overflow-x: hidden;
+  position: relative;
+  background-color: #F4F1EA;
+  color: #111111;
+  font-family: var(--font-sans);
+}
+
+/* Subtle Film Grain Overlay for physical paper texture */
+.film-grain {
+  background-image: url('/brand/grain.png');
+  background-repeat: repeat;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+/* Custom architectural scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F4F1EA;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(17, 17, 17, 0.18);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #7B2CF6;
+}
+
+/* Selection */
+::selection {
+  background-color: rgba(123, 44, 246, 0.2);
+  color: #111111;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Architectural grid line utility */
+.bg-grid-architectural {
+  background-size: 72px 72px;
+  background-image: 
+    linear-gradient(to right, rgba(17, 17, 17, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(17, 17, 17, 0.035) 1px, transparent 1px);
+}
+
+.bg-grid-architectural-dark {
+  background-size: 72px 72px;
+  background-image: 
+    linear-gradient(to right, rgba(244, 241, 234, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(244, 241, 234, 0.045) 1px, transparent 1px);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   GLOBAL EDITORIAL CONTAINER & GRID SYSTEM
+   Unified geometry across 320px -> 2560px+
+   Controlled gutters with graceful widescreen expansion
+   ───────────────────────────────────────────────────────────── */
+.zevats-container {
+  width: 100%;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.25rem;  /* 20px on mobile (320px - 639px) */
+  padding-right: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .zevats-container {
+    padding-left: 2rem;    /* 32px on sm (640px - 767px) */
+    padding-right: 2rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .zevats-container {
+    padding-left: 2.5rem;  /* 40px on md / tablet (768px - 1023px) */
+    padding-right: 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .zevats-container {
+    padding-left: 3rem;    /* 48px on lg / desktop (1024px - 1279px) */
+    padding-right: 3rem;
+    max-width: 1440px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .zevats-container {
+    padding-left: 3.5rem;  /* 56px on xl (1280px - 1535px) */
+    padding-right: 3.5rem;
+    max-width: 1600px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .zevats-container {
+    padding-left: 4rem;    /* 64px on 2xl (1536px - 1919px) */
+    padding-right: 4rem;
+    max-width: 1800px;
+  }
+}
+
+@media (min-width: 1920px) {
+  .zevats-container {
+    padding-left: 4.5rem;  /* 72px on Full HD desktop (1920px - 2559px) */
+    padding-right: 4.5rem;
+    max-width: 2040px;
+  }
+}
+
+@media (min-width: 2560px) {
+  .zevats-container {
+    padding-left: 5rem;    /* 80px on Ultrawide / 4K (2560px+) */
+    padding-right: 5rem;
+    max-width: 2400px;
+  }
+}
