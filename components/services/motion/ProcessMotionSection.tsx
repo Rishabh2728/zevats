@@ -147,31 +147,37 @@ export const ProcessMotionSection: React.FC = () => {
       </div>
 
       {/* Mobile Connected Vertical Timeline */}
-      <div className="lg:hidden relative pl-8 space-y-10">
-        <div className="absolute left-[7px] top-2 bottom-2 w-[2px] bg-[rgba(17,17,17,0.1)]" />
+      <div className="lg:hidden relative">
+        {stages.map((stage, idx) => {
+          const isLast = idx === stages.length - 1;
+          return (
+            <div key={stage.id} className="relative flex items-stretch">
+              {/* Left timeline track */}
+              <div className="flex flex-col items-center mr-5 shrink-0 w-4">
+                {/* Stage Dot */}
+                <div className="w-3.5 h-3.5 rounded-full bg-zevats-purple ring-4 ring-[#FAF9F6] shadow-[0_0_8px_rgba(123,44,246,0.6)] shrink-0 z-10 mt-1" />
 
-        <motion.div
-          className="absolute left-[7px] top-2 w-[2px] bg-zevats-purple"
-          initial={{ height: "0%" }}
-          whileInView={{ height: "100%" }}
-          viewport={{ once: true }}
-          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-        />
+                {/* Connecting Line (runs from this dot to the next dot; stops at last step) */}
+                {!isLast && (
+                  <div className="w-[2px] flex-1 bg-zevats-purple shadow-[0_0_6px_rgba(123,44,246,0.3)]" />
+                )}
+              </div>
 
-        {stages.map((stage) => (
-          <div key={stage.id} className="relative">
-            <div className="absolute -left-[30px] top-1.5 w-3.5 h-3.5 rounded-full bg-zevats-purple ring-4 ring-[#FAF9F6]" />
-            <h3 className="text-xl font-semibold text-[#111111] tracking-tight mb-1">
-              {stage.name}
-            </h3>
-            <p className="text-xs font-medium text-zevats-purple mb-1.5">
-              {stage.oneLiner}
-            </p>
-            <p className="text-sm text-[#555555] leading-relaxed">
-              {stage.detail}
-            </p>
-          </div>
-        ))}
+              {/* Stage Content */}
+              <div className={isLast ? "pt-0.5 pb-2" : "pt-0.5 pb-10"}>
+                <h3 className="text-xl font-semibold text-[#111111] tracking-tight mb-1">
+                  {stage.name}
+                </h3>
+                <p className="text-xs font-medium text-zevats-purple mb-1.5">
+                  {stage.oneLiner}
+                </p>
+                <p className="text-sm text-[#555555] leading-relaxed">
+                  {stage.detail}
+                </p>
+              </div>
+            </div>
+          );
+        })}
       </div>
 
     </section>
